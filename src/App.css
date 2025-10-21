@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+.app {
+ min-height: 100vh;
+ background-color: #fafafa;
+ font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+}
+.app-main {
+ padding-bottom: 32px;
+}
+/* Loading animation */
+@keyframes fadeIn {
+ from {
+ opacity: 0;
+ transform: translateY(10px);
+ }
+ to {
+ opacity: 1;
+ transform: translateY(0);
+ }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@keyframes slideIn {
+ from {
+ opacity: 0;
+ transform: translateY(20px);
+ }
+ to {
+ opacity: 1;
+ transform: translateY(0);
+ }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-main > * {
+  animation: fadeIn 0.4s ease-out;
+}
+/* Scrollbar styling */
+::-webkit-scrollbar {
+ width: 8px;
+}
+::-webkit-scrollbar-track {
+ background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+ background: #dadce0;
+ border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+ background: #5f6368;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Global styles */
+* {
+ box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+ margin: 0;
+ padding: 0;
+ background-color: #fafafa;
+ font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
 }

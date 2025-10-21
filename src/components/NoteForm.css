@@ -1,0 +1,81 @@
+.note-form-container {
+ max-width: 600px;
+ margin: 32px auto;
+ padding: 0 24px;
+}
+.note-form {
+ background-color: #fff;
+ border: 1px solid #dadce0;
+ border-radius: 12px;
+ padding: 16px 20px;
+ box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
+ 0 1px 2px 0 rgba(60, 64, 67, 0.149);
+ transition: all 0.2s ease;
+}
+.note-form:focus-within {
+ box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.302),
+ 0 4px 8px 3px rgba(60, 64, 67, 0.149);
+ transform: translateY(-1px);
+}
+
+.note-form-input,
+.note-form-textarea {
+ width: 100%;
+ border: none;
+ outline: none;
+ font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+ font-size: 14px;
+ color: #202124;
+ resize: none;
+ background-color: transparent;
+}
+.note-form-input {
+ font-size: 16px;
+ font-weight: 500;
+ margin-bottom: 16px;
+ padding: 6px 0;
+}
+.note-form-input::placeholder,
+.note-form-textarea::placeholder {
+ color: #5f6368;
+}
+.note-form-textarea {
+ line-height: 1.6;
+ min-height: 24px;
+ padding: 6px 0;
+}
+.note-form-actions {
+ display: flex;
+ justify-content: flex-end;
+ gap: 12px;
+ margin-top: 16px;
+ padding-top: 16px;
+ border-top: 1px solid #f1f3f4;
+}
+.note-form-button {
+ padding: 10px 24px;
+ border: none;
+ border-radius: 20px;
+ font-size: 14px;
+ font-weight: 500;
+ cursor: pointer;
+ transition: all 0.2s ease;
+ background-color: #fbc02d;
+ color: #202124;
+ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.note-form-button:hover {
+ background-color: #f9a825;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+ transform: translateY(-1px);
+}
+.note-form-button-secondary {
+ background-color: transparent;
+ color: #5f6368;
+ border: 1px solid #dadce0;
+}
+.note-form-button-secondary:hover {
+ background-color: #f8f9fa;
+ border-color: #5f6368;
+ box-shadow: none;
+}

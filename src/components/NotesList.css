@@ -1,0 +1,58 @@
+.notes-container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 32px 24px;
+}
+.notes-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+ gap: 20px;
+ grid-auto-rows: auto;
+}
+/* Masonry-like layout for different height notes */
+@supports (grid-template-rows: masonry) {
+ .notes-grid {
+ grid-template-rows: masonry;
+ }
+}
+.notes-empty {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ min-height: 500px;
+ color: #5f6368;
+ padding: 40px 20px;
+ text-align: center;
+}
+.notes-empty-text {
+ font-size: 22px;
+ margin-top: 24px;
+ font-weight: 400;
+ color: #5f6368;
+}
+/* Responsive design */
+@media (max-width: 768px) {
+ .notes-grid {
+ grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+ gap: 16px;
+ }
+ .notes-container {
+ padding: 24px 16px;
+ }
+}
+@media (max-width: 480px) {
+ .notes-grid {
+ grid-template-columns: 1fr;
+ gap: 12px;
+ }
+ .notes-container {
+ padding: 16px 12px;
+ }
+ .notes-empty {
+ min-height: 400px;
+ }
+ .notes-empty-text {
+ font-size: 18px;
+ }
+}
