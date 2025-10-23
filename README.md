@@ -1,70 +1,154 @@
-# Getting Started with Create React App
+# 🧭 Dokumentasi Kolaborasi GitHub dengan Branch dan Pull Request
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Tujuan
+Dokumentasi ini menjelaskan alur kerja tim dalam satu repository GitHub menggunakan branch untuk setiap fitur, serta proses penggabungan (merge) ke branch utama (`main`) melalui **Pull Request (PR)**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⚙️ 1. Persiapan Awal
 
-### `npm start`
+1. **Leader membuat repository GitHub**
+   - Buat repo baru di GitHub.
+   - Pastikan branch default adalah `main`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Anggota tim melakukan clone repository**
+   ```bash
+   git clone https://github.com/username/nama-repo.git
+   cd nama-repo
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Pastikan semua update terbaru dari main**
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🌳 2. Membuat Branch Baru untuk Fitur
 
-### `npm run build`
+Setiap anggota bertanggung jawab atas satu fitur.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Nama | Branch |
+|-------|---------|
+| Sheva | fitur-sheva |
+| Argha | fitur-argha |
+| Miftah | fitur-miftah |
+| Ivann | fitur-ivann |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Perintah membuat branch:
+```bash
+git checkout -b fitur-sheva
+```
+➡️ Perintah di atas akan membuat branch baru bernama `fitur-sheva`.
+Branch ini otomatis **menyalin semua isi dari `main` saat itu**, jadi tidak kosong.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🧑‍💻 3. Mengembangkan Fitur di Branch Masing-masing
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Lakukan perubahan / ngoding pada branch masing-masing.
+2. Setelah selesai, commit perubahan:
+   ```bash
+   git add .
+   git commit -m "Menambahkan fitur login"
+   ```
+3. Push branch ke GitHub:
+   ```bash
+   git push origin fitur-sheva
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔄 4. Membuat Pull Request (PR)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Setelah push berhasil:
 
-## Learn More
+1. Buka repo di GitHub.
+2. Akan muncul tombol hijau **“Compare & pull request”**.
+3. Klik tombol tersebut → isi deskripsi PR (misalnya “Menambahkan fitur login”).
+4. Pastikan:
+   - **base branch:** `main`
+   - **compare branch:** `fitur-sheva`
+5. Klik **Create Pull Request**.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔍 5. Review & Merge Pull Request
 
-### Code Splitting
+1. **Leader** membuka tab **Pull requests**.
+2. Review perubahan (lihat diff file).
+3. Jika sudah benar, klik:
+   - ✅ *Merge pull request* → untuk gabungkan langsung.
+4. Setelah merge:
+   - `main` kini berisi fitur terbaru dari branch tersebut.
+   - Branch `fitur-sheva` bisa dihapus jika sudah tidak diperlukan.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## ⚠️ 6. Menghindari & Menangani Merge Conflict
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Merge conflict terjadi jika dua branch mengubah baris kode yang sama.
 
-### Making a Progressive Web App
+💡 **Solusi:**
+1. Sebelum membuat PR, selalu update branch dengan isi terbaru dari `main`:
+   ```bash
+   git checkout main
+   git pull origin main
+   git checkout fitur-sheva
+   git merge main
+   ```
+2. Jika muncul conflict, buka file yang ditandai:
+   ```
+   <<<<<<< HEAD
+   versi di branch kamu
+   =======
+   versi di main
+   >>>>>>> main
+   ```
+   Pilih versi yang benar, hapus tanda tersebut, lalu:
+   ```bash
+   git add .
+   git commit -m "Resolve merge conflict"
+   git push
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🔄 7. Update Semua Anggota Setelah Merge
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Setiap kali `main` berubah:
+```bash
+git checkout main
+git pull origin main
+```
+Tujuannya agar semua anggota bekerja dengan versi kode terbaru.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🧹 8. Membersihkan Branch yang Sudah Selesai
 
-### `npm run build` fails to minify
+Setelah merge ke main:
+```bash
+git branch -d fitur-sheva
+git push origin --delete fitur-sheva
+```
+Ini menjaga repo tetap bersih dan mudah dikelola.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 📊 9. Ringkasan Alur Kolaborasi
+
+| Langkah | Penjelasan | Command Utama |
+|----------|-------------|----------------|
+| 1 | Clone repo utama | `git clone` |
+| 2 | Buat branch fitur | `git checkout -b fitur-x` |
+| 3 | Commit dan push | `git add .`, `git commit`, `git push` |
+| 4 | Buat Pull Request | via GitHub |
+| 5 | Review & Merge | via GitHub |
+| 6 | Update branch lokal | `git pull origin main` |
+| 7 | Hapus branch selesai | `git branch -d` |
+
+---
+
+> **Catatan:** Setelah semua fitur di-merge ke `main`, pastikan seluruh anggota melakukan `git pull origin main` agar proyek tetap sinkron dan tidak ada perbedaan versi antar anggota.
