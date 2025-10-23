@@ -1,7 +1,14 @@
 import React from 'react';
 import Note from './Note';
 import './NotesList.css';
-function NotesList({ notes, updateNote, deleteNote }) {
+
+function NotesList({ notes, updateNote, deleteNote, togglePin, isDarkMode }) {
+  // Sort notes: pinned first, then by creation date
+  const sortedNotes = [...notes].sort((a, b) => {
+    if (a.isPinned && !b.isPinned) return -1;
+    if (!a.isPinned && b.isPinned) return 1;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
   // Show message if no notes exist
   if (notes.length === 0) {
     return (
@@ -22,12 +29,14 @@ m3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.4
   return (
     <div className="notes-container">
       <div className="notes-grid">
-        {notes.map((note) => (
+        {sortedNotes.map((note) => (
           <Note
             key={note.id}
             note={note}
             updateNote={updateNote}
             deleteNote={deleteNote}
+            togglePin={togglePin}
+            isDarkMode={isDarkMode}
           />
         ))}
       </div>

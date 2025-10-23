@@ -30,3 +30,41 @@
  letter-spacing: 0;
  margin: 0;
 }
+
+.theme-toggle {
+ background: none;
+ border: none;
+ padding: 8px;
+ border-radius: 50%;
+ cursor: pointer;
+ color: #5f6368;
+ transition: all 0.2s ease;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-left: auto;
+}
+
+.theme-toggle:hover {
+ background-color: #f1f3f4;
+ color: #202124;
+}
+
+/* Dark mode styles */
+.app.dark-mode .header {
+ background-color: #303134;
+ border-bottom-color: #5f6368;
+}
+
+.app.dark-mode .header-title {
+ color: #e8eaed;
+}
+
+.app.dark-mode .theme-toggle {
+ color: #9aa0a6;
+}
+
+.app.dark-mode .theme-toggle:hover {
+ background-color: #5f6368;
+ color: #e8eaed;
+}

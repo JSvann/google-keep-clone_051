@@ -56,3 +56,12 @@
  font-size: 18px;
  }
 }
+
+/* Dark mode styles */
+.app.dark-mode .notes-empty {
+ color: #9aa0a6;
+}
+
+.app.dark-mode .notes-empty-text {
+ color: #9aa0a6;
+}

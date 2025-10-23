@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./Note.css";
 
-function Note({ note, updateNote, deleteNote }) {
+function Note({ note, updateNote, deleteNote, togglePin, isDarkMode }) {
   // --- STATE ---
   const [isEditing, setIsEditing] = useState(false);
   // 1. Dirapikan: Menggabungkan state title dan content
   const [editedNote, setEditedNote] = useState({
     title: note.title,
     content: note.content,
+    image: note.image,
+    reminder: note.reminder,
+    isPinned: note.isPinned,
   });
 
   // 2. Diperbaiki: Sinkronkan state editan jika note prop berubah
@@ -18,6 +21,9 @@ function Note({ note, updateNote, deleteNote }) {
       setEditedNote({
         title: note.title,
         content: note.content,
+        image: note.image,
+        reminder: note.reminder,
+        isPinned: note.isPinned,
       });
     }
   }, [note, isEditing]); // <-- Jalankan efek ini jika note atau isEditing berubah
@@ -38,6 +44,9 @@ function Note({ note, updateNote, deleteNote }) {
       ...note,
       title: editedNote.title,
       content: editedNote.content,
+      image: editedNote.image,
+      reminder: editedNote.reminder,
+      isPinned: editedNote.isPinned,
     });
     setIsEditing(false);
   };
@@ -47,6 +56,9 @@ function Note({ note, updateNote, deleteNote }) {
     setEditedNote({
       title: note.title,
       content: note.content,
+      image: note.image,
+      reminder: note.reminder,
+      isPinned: note.isPinned,
     });
     setIsEditing(false);
   };
@@ -58,28 +70,77 @@ function Note({ note, updateNote, deleteNote }) {
     // isEditing tidak perlu diubah, delete bisa terjadi di view/edit mode
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEditedNote(prev => ({ ...prev, image: event.target.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleReminderChange = (e) => {
+    setEditedNote(prev => ({ ...prev, reminder: e.target.value }));
+  };
+
+  const handleTogglePin = (e) => {
+    e.stopPropagation();
+    togglePin(note.id);
+  };
+
   // --- RENDER ---
   return (
-    <div className="note">
+    <div className={`note ${note.isPinned ? 'pinned' : ''}`}>
       {isEditing ? (
         // --- Edit Mode ---
         <div className="note-edit">
           <input
             type="text"
-            name="title" // <-- Tambahkan 'name'
+            name="title"
             value={editedNote.title}
-            onChange={handleChange} // <-- Pakai handler baru
+            onChange={handleChange}
             placeholder="Title"
             className="note-edit-input"
             autoFocus
           />
           <textarea
-            name="content" // <-- Tambahkan 'name'
+            name="content"
             value={editedNote.content}
-            onChange={handleChange} // <-- Pakai handler baru
+            onChange={handleChange}
             placeholder="Take a note..."
             className="note-edit-textarea"
             rows={4}
+          />
+          {editedNote.image && (
+            <div className="note-edit-image">
+              <img src={editedNote.image} alt="Note attachment" />
+              <button
+                onClick={() => setEditedNote(prev => ({ ...prev, image: null }))}
+                className="remove-image-btn"
+                title="Remove image"
+              >
+                ×
+              </button>
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            id={`image-upload-${note.id}`}
+            style={{ display: 'none' }}
+          />
+          <label htmlFor={`image-upload-${note.id}`} className="note-edit-option">
+            📷 Add Image
+          </label>
+          <input
+            type="datetime-local"
+            value={editedNote.reminder || ''}
+            onChange={handleReminderChange}
+            className="note-edit-reminder"
+            placeholder="Set reminder"
           />
           <div className="note-edit-actions">
             <button
@@ -94,10 +155,9 @@ function Note({ note, updateNote, deleteNote }) {
             >
               Cancel
             </button>
-            {/* 4. Dirapikan: Tombol delete juga ada di mode edit */}
             <button
               onClick={handleDelete}
-              className="note-delete note-delete-edit" // <-- Beri class beda jika perlu
+              className="note-delete note-delete-edit"
               title="Delete note"
             >
               <svg width="24" height="24" viewBox="0 0 24 24">
@@ -112,18 +172,36 @@ function Note({ note, updateNote, deleteNote }) {
       ) : (
         // --- View Mode ---
         <div className="note-view" onClick={() => setIsEditing(true)}>
+          {note.isPinned && <div className="note-pin-indicator">📌</div>}
           {note.title && <h3 className="note-title">{note.title}</h3>}
-          {/* 5. Dirapikan: Tampilkan placeholder jika konten kosong */}
+          {note.image && (
+            <div className="note-image">
+              <img src={note.image} alt="Note attachment" />
+            </div>
+          )}
           <p className="note-content">
             {note.content || (
               <span className="note-placeholder">Empty note...</span>
             )}
           </p>
+          {note.reminder && (
+            <div className="note-reminder">
+              ⏰ {new Date(note.reminder).toLocaleString()}
+            </div>
+          )}
           <div className="note-actions">
             <button
+              onClick={handleTogglePin}
+              className={`note-pin ${note.isPinned ? 'pinned' : ''}`}
+              title={note.isPinned ? 'Unpin note' : 'Pin note'}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 4v12l-4-2-4 2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2z"/>
+              </svg>
+            </button>
+            <button
               onClick={(e) => {
-                // <-- 6. Diperbaiki: Typo 'buttononClick'
-                e.stopPropagation(); // Mencegah triggering edit mode
+                e.stopPropagation();
                 handleDelete();
               }}
               className="note-delete"

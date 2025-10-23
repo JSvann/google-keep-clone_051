@@ -60,3 +60,12 @@ body {
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Dark mode styles */
+.app.dark-mode {
+ background-color: #202124;
+}
+
+.app.dark-mode .app-main {
+ background-color: #202124;
+}
