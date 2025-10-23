@@ -1,6 +1,6 @@
-import React from 'react';
-import Note from './Note';
-import './NotesList.css';
+import React from "react";
+import Note from "./Note";
+import "./NotesList.css";
 
 function NotesList({ notes, updateNote, deleteNote, togglePin, isDarkMode }) {
   // Sort notes: pinned first, then by creation date
