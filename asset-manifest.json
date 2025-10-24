@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/google-keep-clone_kelompok_8/static/css/main.6b892cd4.css",
+    "main.js": "/google-keep-clone_kelompok_8/static/js/main.aa2020a6.js",
+    "static/js/453.2e306946.chunk.js": "/google-keep-clone_kelompok_8/static/js/453.2e306946.chunk.js",
+    "index.html": "/google-keep-clone_kelompok_8/index.html",
+    "main.6b892cd4.css.map": "/google-keep-clone_kelompok_8/static/css/main.6b892cd4.css.map",
+    "main.aa2020a6.js.map": "/google-keep-clone_kelompok_8/static/js/main.aa2020a6.js.map",
+    "453.2e306946.chunk.js.map": "/google-keep-clone_kelompok_8/static/js/453.2e306946.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b892cd4.css",
+    "static/js/main.aa2020a6.js"
+  ]
+}
