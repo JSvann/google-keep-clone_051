@@ -39,7 +39,7 @@ function NoteForm({ addNote, isDarkMode }) {
       setIsExpanded(false);
     }
     // Jika ada isinya, jangan ditutup (ini perilaku yang benar)
-  }, []);
+  }, [note.content, note.title]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
