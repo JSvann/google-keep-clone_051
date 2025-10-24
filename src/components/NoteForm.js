@@ -97,7 +97,7 @@ function NoteForm({ addNote, isDarkMode }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isExpanded, note]); // <-- Dependensi: jalankan ulang jika isExpanded atau note berubah
+  }, [isExpanded, note, tryCloseForm, formRef]); // <-- Dependensi: jalankan ulang jika isExpanded atau note berubah
 
   // --- RENDER ---
   return (
