@@ -15,7 +15,7 @@ function App() {
     if (savedNotes) {
       setNotes(JSON.parse(savedNotes));
     }
-    
+
     const savedTheme = localStorage.getItem("keepTheme");
     if (savedTheme) {
       setIsDarkMode(JSON.parse(savedTheme));
@@ -55,9 +55,11 @@ function App() {
 
   // Function to toggle pin status
   const togglePin = (id) => {
-    setNotes(notes.map((note) => 
-      note.id === id ? { ...note, isPinned: !note.isPinned } : note
-    ));
+    setNotes(
+      notes.map((note) =>
+        note.id === id ? { ...note, isPinned: !note.isPinned } : note
+      )
+    );
   };
 
   // Function to toggle dark mode
@@ -65,7 +67,7 @@ function App() {
     setIsDarkMode(!isDarkMode);
   };
   return (
-    <div className={`app ${isDarkMode ? 'dark-mode' : ''}`}>
+    <div className={`app ${isDarkMode ? "dark-mode" : ""}`}>
       <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <main className="app-main">
         <NoteForm addNote={addNote} isDarkMode={isDarkMode} />

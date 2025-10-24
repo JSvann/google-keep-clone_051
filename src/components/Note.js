@@ -75,14 +75,14 @@ function Note({ note, updateNote, deleteNote, togglePin, isDarkMode }) {
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setEditedNote(prev => ({ ...prev, image: event.target.result }));
+        setEditedNote((prev) => ({ ...prev, image: event.target.result }));
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleReminderChange = (e) => {
-    setEditedNote(prev => ({ ...prev, reminder: e.target.value }));
+    setEditedNote((prev) => ({ ...prev, reminder: e.target.value }));
   };
 
   const handleTogglePin = (e) => {
@@ -92,7 +92,7 @@ function Note({ note, updateNote, deleteNote, togglePin, isDarkMode }) {
 
   // --- RENDER ---
   return (
-    <div className={`note ${note.isPinned ? 'pinned' : ''}`}>
+    <div className={`note ${note.isPinned ? "pinned" : ""}`}>
       {isEditing ? (
         // --- Edit Mode ---
         <div className="note-edit">
@@ -117,7 +117,9 @@ function Note({ note, updateNote, deleteNote, togglePin, isDarkMode }) {
             <div className="note-edit-image">
               <img src={editedNote.image} alt="Note attachment" />
               <button
-                onClick={() => setEditedNote(prev => ({ ...prev, image: null }))}
+                onClick={() =>
+                  setEditedNote((prev) => ({ ...prev, image: null }))
+                }
                 className="remove-image-btn"
                 title="Remove image"
               >
@@ -130,14 +132,17 @@ function Note({ note, updateNote, deleteNote, togglePin, isDarkMode }) {
             accept="image/*"
             onChange={handleImageUpload}
             id={`image-upload-${note.id}`}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
-          <label htmlFor={`image-upload-${note.id}`} className="note-edit-option">
+          <label
+            htmlFor={`image-upload-${note.id}`}
+            className="note-edit-option"
+          >
             📷 Add Image
           </label>
           <input
             type="datetime-local"
-            value={editedNote.reminder || ''}
+            value={editedNote.reminder || ""}
             onChange={handleReminderChange}
             className="note-edit-reminder"
             placeholder="Set reminder"
@@ -192,11 +197,16 @@ function Note({ note, updateNote, deleteNote, togglePin, isDarkMode }) {
           <div className="note-actions">
             <button
               onClick={handleTogglePin}
-              className={`note-pin ${note.isPinned ? 'pinned' : ''}`}
-              title={note.isPinned ? 'Unpin note' : 'Pin note'}
+              className={`note-pin ${note.isPinned ? "pinned" : ""}`}
+              title={note.isPinned ? "Unpin note" : "Pin note"}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M16 4v12l-4-2-4 2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2z"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M16 4v12l-4-2-4 2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2z" />
               </svg>
             </button>
             <button
