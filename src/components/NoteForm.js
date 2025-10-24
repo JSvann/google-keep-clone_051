@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./NoteForm.css";
 
 function NoteForm({ addNote, isDarkMode }) {
@@ -33,13 +33,13 @@ function NoteForm({ addNote, isDarkMode }) {
 
   // 4. Dirapikan: Mengganti nama handleClose menjadi tryCloseForm
   //    Fungsi ini akan dipakai oleh tombol "Close" DAN klik di luar
-  const tryCloseForm = () => {
+  const tryCloseForm = useCallback(() => {
     // Hanya tutup jika form kosong
     if (!note.title.trim() && !note.content.trim()) {
       setIsExpanded(false);
     }
     // Jika ada isinya, jangan ditutup (ini perilaku yang benar)
-  };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
